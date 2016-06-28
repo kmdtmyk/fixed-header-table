@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.25/vue.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/superagent/2.0.0/superagent.min.js'></script>
+    <script src='fixed-table.js'></script>
+    <link rel='stylesheet' href='style.css'>
+  </head>
+  <body>
+    <br>
+
+    <div id='app'>
+      <table>
+        <thead>
+          <th v-for='field in fields' contenteditable=true>{{field}}</th>
+        </thead>
+        <tbody>
+          <tr v-for='person in people'>
+            <td v-for='field in fields' contenteditable=true>{{person[field]}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章長い文章</p>
+
+    <script src='index.js'></script>
+  </body>
+</html>

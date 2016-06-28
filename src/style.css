@@ -1,0 +1,42 @@
+html{
+  font-family: Meiryo;
+  font-size: 12px;
+}
+
+table{
+  border-collapse: collapse;
+}
+
+th, td{
+  border: 1px solid gray;
+  white-space: nowrap;
+}
+
+th{
+  background-color: cyan;
+}
+
+td{
+  background-color: white;
+}
+
+
+
+th:first-child{
+  /*position: fixed;
+  top: 0;
+  left: 0;*/
+  position: relative;
+}
+
+th{
+  /*position: fixed;
+  top: 0;*/
+  position: relative;
+  /*top: 10px;*/
+}
+
+td:first-child{
+  /*position: fixed;
+  left: 0;*/
+}
