@@ -15,6 +15,24 @@ class FixedTable{
       this._syncTopHeaderSize();
     });
 
+    this._scrollWatch();
+
+  }
+
+  _scrollWatch(){
+    document.addEventListener('scroll', (e) => {
+      var scrollY = window.scrollY;
+      var rect = this.table.getBoundingClientRect();
+      var top = rect.top + window.pageYOffset;
+      if(scrollY > top){
+        this.topHeader.style.display = 'block';
+        this.topHeader.style.position = 'fixed';
+        this.topHeader.style.top = 0;
+      }else{
+        this.topHeader.style.display = 'none';
+      }
+    });
+
   }
 
   _syncTopHeaderSize(){
@@ -75,6 +93,7 @@ class FixedTable{
       DOMUtil.bindElements([th, originalTh])
     });
 
+    topHeader.style.display = 'none';
     topHeader.style.position = 'absolute';
     topHeader.style.top = '22px';
     DOMUtil.insertAfter(table, topHeader);
