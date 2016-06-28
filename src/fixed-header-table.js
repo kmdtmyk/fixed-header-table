@@ -7,26 +7,37 @@ class FixedTable{
     this.col = 2;
     this.row = 2;
 
-    table.style.position = 'relative';
-
     this._wrap();
+    this._createTopHeader();
 
-    var header = this._createTopHeader();
-    header.style.position = 'absolute';
-    header.style.top = '22px';
-    DOMUtil.insertAfter(table, header);
-
-
-    this._observe(table, function(){
-      console.log(arguments);
+    this._observe(table, () => {
+      // console.log(arguments);
+      this._syncTopHeaderSize();
     });
 
+  }
+
+  _syncTopHeaderSize(){
+    var tableThs = this.table.querySelectorAll('th');
+    var topHeaderThs = this.topHeader.querySelectorAll('th');
+
+    this.topHeader.style.width = this.table.offsetWidth + 'px';
+
+    topHeaderThs.forEach((th, index) => {
+      var tableTh = tableThs[index];
+      var offsetWidth = tableTh.offsetWidth;
+      var offsetHeight = tableTh.offsetHeight;
+      // console.log(offsetWidth, offsetHeight)
+      th.style.width = offsetWidth - 3 + 'px';
+      // th.style.height = offsetHeight + 'px';
+    });
   }
 
   _wrap(){
     var div = document.createElement('div');
     div.style.position = 'relative';
     DOMUtil.wrap(this.table, div);
+    this.table.style.position = 'relative';
   }
 
 
@@ -49,11 +60,25 @@ class FixedTable{
   }
 
   _createTopHeader(){
-    var clone = this.table.cloneNode(true);
-    clone.querySelectorAll('tbody').forEach(function(tbody){
-      clone.removeChild(tbody);
-    })
-    return clone;
+    var table = this.table;
+
+    var topHeader = table.cloneNode(true);
+    topHeader.querySelectorAll('tbody').forEach(function(tbody){
+      topHeader.removeChild(tbody);
+    });
+
+    var originalThs = table.querySelectorAll('th');
+    var topHeaderThs = topHeader.querySelectorAll('th');
+
+    topHeaderThs.forEach((th, index) => {
+      var originalTh = originalThs[index];
+      DOMUtil.bindElements([th, originalTh])
+    });
+
+    topHeader.style.position = 'absolute';
+    topHeader.style.top = '22px';
+    DOMUtil.insertAfter(table, topHeader);
+    this.topHeader = topHeader;
   }
 
   _createLeftHeader(){

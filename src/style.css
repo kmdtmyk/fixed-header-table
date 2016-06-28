@@ -4,7 +4,7 @@ html{
 }
 
 div{
-  margin: 10px auto;  
+  margin: 10px auto;
 }
 
 table{
@@ -22,25 +22,4 @@ th{
 
 td{
   background-color: white;
-}
-
-
-
-th:first-child{
-  /*position: fixed;
-  top: 0;
-  left: 0;*/
-  position: relative;
-}
-
-th{
-  /*position: fixed;
-  top: 0;*/
-  position: relative;
-  /*top: 10px;*/
-}
-
-td:first-child{
-  /*position: fixed;
-  left: 0;*/
 }

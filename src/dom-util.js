@@ -39,7 +39,7 @@ class DOMUtil{
         text = mutation.target.innerText;
       }
       this.syncInnerText(elements, text);
-      
+
     });
 
     var options = {
