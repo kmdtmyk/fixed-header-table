@@ -5,11 +5,21 @@
     <title>Document</title>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.25/vue.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/superagent/2.0.0/superagent.min.js'></script>
-    <script src='fixed-table.js'></script>
+    <script src='dom-util.js'></script>
+    <script src='fixed-header-table.js'></script>
     <link rel='stylesheet' href='style.css'>
   </head>
   <body>
-    <br>
+    <h1>test</h1>
+
+    <div>
+      <input type='text' id='input1' value='foo'>
+    </div>
+
+    <div>
+      <p id='p1' contenteditable=true>this is a text.</p>
+      <p id='p2' contenteditable=true>this is a other text.</p>
+    </div>
 
     <div id='app'>
       <table>

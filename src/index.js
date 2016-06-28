@@ -48,6 +48,13 @@ function main(){
     new FixedTable(table);
   });
 
+
+  var p1 = document.getElementById('p1');
+  DOMUtil.insertAfter(p1, DOMUtil.boundClone(p1));
+
+  var p2 = document.getElementById('p2');
+  DOMUtil.insertAfter(p2, DOMUtil.boundClone(p2));
+
 }
 
 })()

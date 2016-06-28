@@ -3,6 +3,10 @@ html{
   font-size: 12px;
 }
 
+div{
+  margin: 10px auto;  
+}
+
 table{
   border-collapse: collapse;
 }
