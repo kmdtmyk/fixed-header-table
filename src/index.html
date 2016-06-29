@@ -24,9 +24,11 @@
       </div>
 
       <div>
-        <input type='checkbox' v-model='contenteditable'>
+        <label>
+          <input type='checkbox' v-model='contenteditable'>contenteditable
+        </label>
       </div>
-      
+
       <table>
         <thead>
           <th v-for='field in fields' contenteditable={{contenteditable}}>{{field}}</th>

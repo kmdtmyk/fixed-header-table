@@ -25,12 +25,29 @@ class DOMUtil{
     })
   }
 
+  static syncAttribute(elements, name, value){
+    elements.forEach((element) => {
+      if(value === null){
+        element.removeAttribute(name);
+      }else if(element.getAttribute(name) !== value){
+        element.setAttribute(name, value);
+      }
+    })
+  }
+
   static bindElements(elements){
     // console.log(elements);
 
     var mutationObserver = new MutationObserver((mutations) => {
       // console.log(mutations)
-      
+      mutations.forEach((mutation) => {
+        if(mutation.type === 'attributes'){
+          var name = mutation.attributeName;
+          var value = mutation.target.getAttribute(name);
+          this.syncAttribute(elements, name, value);
+        }
+      })
+
       var mutation = mutations[mutations.length - 1];
       var type = mutation.type;
       var text;
