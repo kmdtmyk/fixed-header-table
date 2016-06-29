@@ -32,6 +32,7 @@ function main(){
     data: {
       fields: fields,
       people: [],
+      contenteditable: true,
     },
   })
 

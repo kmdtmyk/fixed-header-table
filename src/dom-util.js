@@ -29,7 +29,8 @@ class DOMUtil{
     // console.log(elements);
 
     var mutationObserver = new MutationObserver((mutations) => {
-
+      // console.log(mutations)
+      
       var mutation = mutations[mutations.length - 1];
       var type = mutation.type;
       var text;
@@ -55,6 +56,23 @@ class DOMUtil{
       mutationObserver.observe(element, options);
     });
 
+  }
+
+  static getAbsoluteTop(element){
+    var scrollY = window.scrollY;
+    var rect = element.getBoundingClientRect();
+    return rect.top + window.pageYOffset;
+  }
+
+  static getAbsoluteBottom(element){
+    var scrollY = window.scrollY;
+    var rect = element.getBoundingClientRect();
+    return rect.bottom + window.pageYOffset;
+  }
+
+  static getHeight(element){
+    var rect = element.getBoundingClientRect();
+    return rect.height;
   }
 
 }

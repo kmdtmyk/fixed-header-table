@@ -11,8 +11,8 @@ class FixedTable{
     this._createTopHeader();
 
     this._observe(table, () => {
-      // console.log(arguments);
       this._syncTopHeaderSize();
+      this._updateHeaders();
     });
 
     this._scrollWatch();
@@ -21,18 +21,48 @@ class FixedTable{
 
   _scrollWatch(){
     document.addEventListener('scroll', (e) => {
-      var scrollY = window.scrollY;
-      var rect = this.table.getBoundingClientRect();
-      var top = rect.top + window.pageYOffset;
-      if(scrollY > top){
-        this.topHeader.style.display = 'block';
-        this.topHeader.style.position = 'fixed';
-        this.topHeader.style.top = 0;
-      }else{
-        this.topHeader.style.display = 'none';
-      }
+      this._updateHeaders();
     });
+  }
 
+  _updateHeaders(){
+    this._updateTopHeader();
+  }
+
+  _updateTopHeader(){
+    var scrollY = window.scrollY;
+    var tableTop = DOMUtil.getAbsoluteTop(this.table);
+    var tableBottom = DOMUtil.getAbsoluteBottom(this.table);
+    var headerBottom = DOMUtil.getAbsoluteBottom(this.topHeader);
+    var headerHeight = this.topHeader.getBoundingClientRect().height;
+
+    if(tableBottom - headerHeight < scrollY){
+      // console.log('leave')
+      this._leaveTopHeader();
+    }else if(tableTop < scrollY){
+      // console.log('fix')
+      this._fixTopHeader();
+    }else{
+      // console.log('reset')
+      this._resetTopHeader();
+    }
+  }
+
+  _fixTopHeader(){
+    this.topHeader.style.display = 'block';
+    this.topHeader.style.position = 'fixed';
+    this.topHeader.style.top = 0;
+  }
+
+  _leaveTopHeader(){
+    this.topHeader.style.display = 'block';
+    this.topHeader.style.position = 'absolute';
+    this.topHeader.style.top = DOMUtil.getHeight(this.table) - DOMUtil.getHeight(this.topHeader) + 'px';
+  }
+
+  _resetTopHeader(){
+    this.topHeader.style.position = 'absolute';
+    this.topHeader.style.top = 0;
   }
 
   _syncTopHeaderSize(){
@@ -93,11 +123,11 @@ class FixedTable{
       DOMUtil.bindElements([th, originalTh])
     });
 
-    topHeader.style.display = 'none';
     topHeader.style.position = 'absolute';
-    topHeader.style.top = '22px';
+    topHeader.style.top = 0;
     DOMUtil.insertAfter(table, topHeader);
     this.topHeader = topHeader;
+
   }
 
   _createLeftHeader(){

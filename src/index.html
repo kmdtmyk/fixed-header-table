@@ -12,23 +12,28 @@
   <body>
     <h1>test</h1>
 
-    <div>
-      <input type='text' id='input1' value='foo'>
-    </div>
-
-    <div>
-      <p id='p1' contenteditable=true>this is a text.</p>
-      <p id='p2' contenteditable=true>this is a other text.</p>
-    </div>
-
     <div id='app'>
+
+      <div>
+        <input type='text' id='input1' value='foo'>
+      </div>
+
+      <div>
+        <p id='p1' contenteditable={{contenteditable}}>this is a text.</p>
+        <p id='p2' contenteditable={{contenteditable}}>this is a other text.</p>
+      </div>
+
+      <div>
+        <input type='checkbox' v-model='contenteditable'>
+      </div>
+      
       <table>
         <thead>
-          <th v-for='field in fields' contenteditable=true>{{field}}</th>
+          <th v-for='field in fields' contenteditable={{contenteditable}}>{{field}}</th>
         </thead>
         <tbody>
           <tr v-for='person in people'>
-            <td v-for='field in fields' contenteditable=true>{{person[field]}}</td>
+            <td v-for='field in fields' contenteditable={{contenteditable}}>{{person[field]}}</td>
           </tr>
         </tbody>
       </table>
